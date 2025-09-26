@@ -36,4 +36,17 @@ const myObject = ({
 
 <p>在v-for中使用范围值</p>
 <span v-for="n in 3">{{ n }}</span>
+
+<p>template 上的 v-for</p>
+<ul>
+ // 渲染包含多个元素的块
+ <template v-for="item in items">
+  <li>{{ item.message }}</li>
+  <li class="divider" role="presentation">content</li>
+ </template>
+</ul>
+
+<p>v-if 和 v-for</p>
+v-if会比v-for又更高的优先级
+
 </template>
