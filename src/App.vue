@@ -3,9 +3,11 @@ import HelloWorld from './components/HelloWorld.vue'
 import List from './components/List.vue'
 import EventHandling from './components/EventHandling.vue'
 import Forms from './components/Forms.vue'
+import Watchers from './components/Watchers.vue'
 </script>
 
 <template>
+  <Watchers />
   <Forms />
   <div>
     <a href="https://vite.dev" target="_blank">
