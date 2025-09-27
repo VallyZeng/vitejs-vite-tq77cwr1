@@ -1,7 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import TodoItem from './TodoItem.vue'
 
-const items = ([{message: 'Foo', id: 1}, {message: 'Bar', id: 2 }])
+const items = ([{message: 'Foo', id: 1, title: 'i am title'}, {message: 'Bar', id: 2, title: 'i am title2'}])
 // 访问父属性
 const parentMessage = ref('Parent')
 
@@ -21,6 +22,19 @@ const todos = ([
  }
 ])
 
+const numbers = ref([1, 2, 3]);
+const eventNumber = computed(() => {
+ return [...numbers.value].reverse()
+})
+
+const sets = ref([
+    [1,2,3,4,5],
+    [7,8,9,10,11]
+])
+
+function even(numbers) {
+ return numbers.filter((number) => number % 2 === 0)
+}
 </script>
 
 <template>
@@ -78,4 +92,15 @@ template写法
 <template v-for="item in items" :key:="item.id">
  <li>{{ item.message }}</li>
 </template>
+<p>组件上使用v-for</p>
+通过传递 props，使组件能够拿到值
+<TodoItem v-for="item in items" :key="item.id" :title="item.title"/>
+<p>展示过滤或排序后的结果</p>
+<ul>
+ <li v-for="number in eventNumber">{{ number }}</li>
+</ul>
+多层嵌套的情况可使用函数操作
+<ul v-for="numbers in sets">
+ <li v-for="n in even(numbers)">{{ n }}</li>
+</ul>
 </template>
