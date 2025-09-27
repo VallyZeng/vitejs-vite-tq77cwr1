@@ -1,6 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import List from './components/List.vue'
+import EventHandling from './components/EventHandling.vue';
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import List from './components/List.vue'
   </div>
   <HelloWorld msg="Vite + Vue" />
   <List />
+  <EventHandling />
 </template>
 
 <style scoped>
