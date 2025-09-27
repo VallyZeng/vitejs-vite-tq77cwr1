@@ -1,10 +1,12 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 import List from './components/List.vue'
-import EventHandling from './components/EventHandling.vue';
+import EventHandling from './components/EventHandling.vue'
+import Forms from './components/Forms.vue'
 </script>
 
 <template>
+  <Forms />
   <div>
     <a href="https://vite.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
