@@ -108,7 +108,7 @@ const data = ref(null)
 //   console.log(`todoId变动`)
 //  },
 // )
-// 上面的代码用watchEffect替代
+// 上面的代码用watchEffect替代, watchEffect可以注册需要监听的变量（除了异步调用中使用到的变量）
 watchEffect(async () => {
   console.log("正在获取数据", `${todoId.value}`)
   try {
@@ -127,7 +127,7 @@ const userId = ref(1)
 const userData = ref(null)
 
 watchEffect((onCleanup) => {
- const controller = new AboardController()
+ const controller = new AbortController()
  const currentUserId = userId.value
 
  console.log(`获取用户 ${currentUserId} 的数据`)
@@ -135,8 +135,25 @@ watchEffect((onCleanup) => {
  // 注册清理回调函数
  onCleanup(() => {
   console.log(`清理用户 ${currentUserId} 的数据`)
-  controller.aboard()
+  controller.abort()
  })
+
+
+ fetch(`https://jsonplaceholder.typicode.com/users/${currentUserId}`, {
+  signal: controller.signal
+ }).then(response => response.json())
+ .then(data => {
+  userData.value = data
+  console.log(` 用户${currentUserId} 数据加载完成`)
+ })
+ .catch(error => {
+  if(error.name !== 'AbordError') {
+   console.error('请求错误', error)
+  } else {
+   console.log(`用户 ${currentUserId} 请求被取消`)
+  }
+ })
+
 })
 
 </script>
@@ -160,5 +177,17 @@ watchEffect((onCleanup) => {
 <button @click="todoId = 1">重置为1</button>
 <div>{{ data }}</div>
 <h2>副作用清理</h2>
+<div>
+ <h3>用户数据加载（带取消）</h3>
+ <button v-for="i in 5" :key="i" @click="userId = i" :style="{margin: '5px'}">
+ 用户 {{ i }}
+ </button>
 
+ <div v-if="userData">
+  <h4>用户信息：</h4>
+  <p>姓名：{{ userData.name }}</p>
+  <p>邮箱：{{ userData.email }}</p>
+ </div>
+
+</div>
 </template>
