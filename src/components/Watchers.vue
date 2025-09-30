@@ -1,5 +1,6 @@
 <script setup>
 import { reactive, ref, watch, watchEffect } from 'vue'
+import CallbackFlushTimeing from './watchers/CallbackFlushTimeing.vue';
 
 /**
 在组合式 API 中，我们可以使用 watch 函数在每次响应式状态发生变化时触发回调函数 
@@ -153,8 +154,10 @@ watchEffect((onCleanup) => {
    console.log(`用户 ${currentUserId} 请求被取消`)
   }
  })
-
 })
+//回调的触发时机
+// postWatch
+
 
 </script>
 
@@ -188,6 +191,7 @@ watchEffect((onCleanup) => {
   <p>姓名：{{ userData.name }}</p>
   <p>邮箱：{{ userData.email }}</p>
  </div>
-
 </div>
+
+<CallbackFlushTimeing />
 </template>
