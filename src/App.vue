@@ -5,9 +5,11 @@ import EventHandling from './components/EventHandling.vue'
 import Forms from './components/Forms.vue'
 import Watchers from './components/Watchers.vue'
 import TemplateRefs from './components/TemplateRefs.vue'
+import ComponentBasic from './components/ComponentBasic.vue'
 </script>
 
 <template>
+  <ComponentBasic />
   <TemplateRefs />
   <Watchers />
   <Forms />
